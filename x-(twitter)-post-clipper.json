@@ -1,0 +1,44 @@
+{
+	"schemaVersion": "0.1.0",
+	"name": "X (Twitter) Post - English Version",
+	"behavior": "create",
+	"noteContentFormat": "> [!info] Source\n> [@{{url|split:\"/status/\"|first|split:\"/\"|last}} on X]({{url}})\n> Clipped: {{date|date:\"YYYY-MM-DD\"}}\n\n---\n{% if meta:property:og:image contains \"amplify_video_thumb\" %}\n## Video\n\n<iframe src=\"https://platform.twitter.com/embed/Tweet.html?id={{url|split:\"/status/\"|last|split:\"?\"|first}}\" width=\"100%\" height=\"550\" frameborder=\"0\" allowfullscreen></iframe>\n\nIf the player does not appear, [open the original post on X]({{url}}).\n\n---\n\n## Video Source\n\nhttps://x.com{{selector:a[href*=\"/status/\"]?href|first}}\n{% else %}\n## Status\n\n<iframe src=\"https://platform.twitter.com/embed/Tweet.html?id={{url|split:\"/status/\"|last|split:\"?\"|first}}\" width=\"100%\" height=\"550\" frameborder=\"0\" allowfullscreen></iframe>\n\nIf the embed does not appear, [open the original post on X]({{url}}).\n{% endif %}\n\n---\n\n## Initial Information\n{% if meta:property:og:description contains \"…\" %}\n> [!warning] Truncated text\n> This post is longer than X's preview limit. The text below stops mid-sentence, so the Key Points and What Needs Verification sections are based only on this fragment. Open [the original post on X]({{url}}) to read it in full.\n{% endif %}\n{{meta:property:og:description}}\n\n---\n\n## Nature of the Statement\n\n{{\"Read the X post in the context. Write your assessment of the statement in English using EXACTLY these three lines, one line each with no blank line between them. First line: **Type** followed by an em dash, then one short sentence choosing from event claim, opinion, complaint, sarcasm, promotion, or a mix, ending with a period. Second line: **Markers** followed by an em dash, then 1-2 short quotes from the post inside double quotes with a brief note in parentheses, separated by semicolons, ending with a period. Third line: **Limits** followed by an em dash, then one sentence about what cannot be judged from the text alone, ending with a period. Write sarcasm as a possibility, not a certainty. Do not guess the author's personal intent. Do not use Markdown headings, lists, or numbering. Do not end a line with a space. No opening or closing sentence.\"|trim}}\n\n---\n\n## Key Points\n\n{{\"Read the X post in the context. Write 3-5 core points in English, each one short sentence starting with a dash and a space. The post may be sarcasm, opinion, or a complaint rather than a report of events. If it is sarcasm, write the point as what the author says, not as something that actually happened. Read the sentence carefully: do not swap who did what to whom. Do not repeat the post word for word; summarise its meaning. Do not add numbers, dates, background, or conclusions that are not written. Do not use Markdown headings. Do not end a line with a space. No opening or closing sentence.\"|trim}}\n\n---\n\n## What Needs Verification\n\n{{\"Read the X post in the context. Write two parts in English with no Markdown headings. First part starts with **Check** followed by an em dash, then one short paragraph listing what the post does not explain, so a reader cannot judge it alone, such as time, location, who recorded it, or the original source. Read the sentence carefully: do not swap who did what to whom. If the post turns out to be only opinion or sarcasm with no event claim, say so plainly and do not demand event verification. Second part starts with **How to check** followed by an em dash, then 2-3 search keywords or kinds of sources to open, separated by semicolons. Name the kind of source, not a specific website; do not invent site names or web addresses. Do NOT conclude hoax or fact. Do NOT judge right or wrong. You have no internet access, so do not invent check results. Do not end a line with a space. No opening sentence.\"|trim}}\n",
+	"properties": [
+		{
+			"name": "created",
+			"value": "{{date|date:\"YYYY-MM-DD\"}}",
+			"type": "date"
+		},
+		{
+			"name": "tags",
+			"value": "clippings, twitter",
+			"type": "multitext"
+		},
+		{
+			"name": "url",
+			"value": "{{url}}",
+			"type": "text"
+		},
+		{
+			"name": "author",
+			"value": "{{url|split:\"/status/\"|first|split:\"/\"|last}}",
+			"type": "text"
+		},
+		{
+			"name": "profile",
+			"value": "https://x.com/{{url|split:\"/status/\"|first|split:\"/\"|last}}",
+			"type": "text"
+		},
+		{
+			"name": "published",
+			"value": "{{published}}",
+			"type": "date"
+		}
+	],
+	"context": "URL: {{url}}\n\n{{meta:property:og:description}}",
+	"triggers": [
+		"/^https:\\/\\/(x|twitter)\\.com\\/[A-Za-z0-9_]+\\/status\\/\\d+/"
+	],
+	"noteNameFormat": "X {{url|split:\"/status/\"|first|split:\"/\"|last}} {{published|date:\"YYYY-MM-DD\"}}",
+	"path": "Clippings/Social"
+}

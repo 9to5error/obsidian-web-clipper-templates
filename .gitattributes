@@ -1,0 +1,11 @@
+# Line endings
+#
+# These are JSON templates and Markdown docs. They contain no binaries and
+# nothing that cares about the platform, so the whole repository is pinned to
+# LF. Without this file, a Windows checkout with core.autocrlf=true rewrites
+# every file to CRLF, which makes "Download ZIP" produce different bytes
+# depending on who downloads it — for no reason at all.
+#
+# text=auto   : let Git decide what is text
+# eol=lf      : check text out with LF on every platform, Windows included
+* text=auto eol=lf
